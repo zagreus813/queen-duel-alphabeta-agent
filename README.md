@@ -37,33 +37,33 @@ The game is played on a $7 \times 7$ grid between two queens:
 
 ##  Architecture & Strategic Design
 
-                   +-------------------------------+
-                   |      CustomPlayer.move()      |
-                   +---------------+---------------+
-                                   |
-          +------------------------+------------------------+
-          |                                                 |
-[Symmetric Opening Anchors]                     [Dynamic Search Depth]
-- (1,1), (1,5), (5,1), (5,5)                    - Move < 10  -> Depth 2
-                                                - Move 10-20 -> Depth 4
-                                                - Move 20-30 -> Depth 6
-                                                - Move > 30  -> Depth 8+
-                                                            |
-                                         +------------------+------------------+
-                                         |        in_margin_and_push()         |
-                                         | (Pre-Search Danger Move Filter)     |
-                                         +------------------+------------------+
-                                                            |
-                                         +------------------+------------------+
-                                         |     Alpha-Beta Pruning Search       |
-                                         +------------------+------------------+
-                                                            |
-                                   +------------------------+------------------------+
-                                   |                                                 |
-                     [Move Flexibility Ordering]                              [CustomEvalFn]
-                     - Forecast-based branch ranking                          - Mobility differential
-                                                                              - Center-square bonus
-                                                                              - Immediate push bonus
+                               +-------------------------------+
+                               |      CustomPlayer.move()      |
+                               +---------------+---------------+
+                                               |
+                      +------------------------+------------------------+
+                      |                                                 |
+              [Symmetric Opening Anchors]                     [Dynamic Search Depth]
+              - (1,1), (1,5), (5,1), (5,5)                    - Move < 10  -> Depth 2
+                                                            - Move 10-20 -> Depth 4
+                                                            - Move 20-30 -> Depth 6
+                                                            - Move > 30  -> Depth 8+
+                                                                        |
+                                                     +------------------+------------------+
+                                                     |        in_margin_and_push()         |
+                                                     | (Pre-Search Danger Move Filter)     |
+                                                     +------------------+------------------+
+                                                                        |
+                                                     +------------------+------------------+
+                                                     |     Alpha-Beta Pruning Search       |
+                                                     +------------------+------------------+
+                                                                        |
+                                               +------------------------+------------------------+
+                                               |                                                 |
+                                 [Move Flexibility Ordering]                              [CustomEvalFn]
+                                 - Forecast-based branch ranking                          - Mobility differential
+                                                                                          - Center-square bonus
+                                                                                          - Immediate push bonus
 
 
 
