@@ -9,7 +9,6 @@ An adversarial game-playing AI agent engineered for **Queen Duel** (a competitiv
 
 In a course-wide double round-robin tournament against 49 peer agents (98 total matches, alternating player order P1/P2), this agent finished **3rd Place overall with a 96–2 record (97.96% win rate)**[cite: 3].
 
----
 
 ##  Tournament Results
 
@@ -23,7 +22,6 @@ The competition evaluated each agent head-to-head in a double round-robin format
 | **Losses** | **2** | 2.04% loss rate[cite: 3] |
 | **Baseline Matches** | **99% / 100%** | Measured against randomized and heuristic baselines[cite: 3] |
 
----
 
 ##  Game Mechanics
 
@@ -33,7 +31,6 @@ The game is played on a $7 \times 7$ grid between two queens:
 * **Push Action:** Landing on a tile occupied by the opponent queen pushes them 1 cell in the attack direction[cite: 1].
 * **Loss Conditions:** A player loses if pushed out of bounds or if no legal moves remain on their turn[cite: 1].
 
----
 
 ##  Architecture & Strategic Design
 
@@ -91,7 +88,6 @@ $$\text{Utility}(s) = \Big(|\mathcal{M}_{\text{player}}| - |\mathcal{M}_{\text{o
 * **Center Dominance:** $+10$ strategic score for holding center tiles `(3,3)`, `(3,4)`, `(4,3)`, `(4,4)`[cite: 2, 3].
 * **Push Bonus:** $+15$ incentive for achieving offensive displacement threats[cite: 2, 3].
 
----
 
 ##  Repository Structure
 
@@ -105,13 +101,15 @@ $$\text{Utility}(s) = \Big(|\mathcal{M}_{\text{player}}| - |\mathcal{M}_{\text{o
 ├── .gitignore                  # Git ignore rules for Python builds
 └── requirements.txt                   
 
+```
 
-## gi Getting Started
+## Getting Started
 
 ### Prerequisites
 * Python 3.8 or higher
 
 ### Installation
+
 ```bash
 # Clone the repository
 git clone [https://github.com/](https://github.com/)<YOUR_GITHUB_USERNAME>/<REPO_NAME>.git
@@ -119,3 +117,4 @@ cd <REPO_NAME>
 
 # Install dependencies
 pip install -r requirements.txt
+```
