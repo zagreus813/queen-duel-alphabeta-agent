@@ -1,4 +1,4 @@
-# 👑 Queen Duel AI — 3rd Place Tournament Agent (Adversarial Search)
+#  Queen Duel AI 
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg?logo=python&logoColor=white)](https://python.org)
 [![Tournament Rank](https://img.shields.io/badge/Tournament%20Rank-3rd%20Place%20/%2050-gold.svg)](#-tournament-results)
