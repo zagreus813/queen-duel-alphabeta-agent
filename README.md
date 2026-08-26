@@ -112,8 +112,8 @@ $$\text{Utility}(s) = \Big(|\mathcal{M}_{\text{player}}| - |\mathcal{M}_{\text{o
 
 ```bash
 # Clone the repository
-git clone [https://github.com/](https://github.com/)<YOUR_GITHUB_USERNAME>/<REPO_NAME>.git
-cd <REPO_NAME>
+git clone https://github.com/zagreus813/queen-duel-alphabeta-agent.git
+cd queen-duel-alphabeta-agent
 
 # Install dependencies
 pip install -r requirements.txt
