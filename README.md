@@ -7,29 +7,29 @@
 
 An adversarial game-playing AI agent engineered for **Queen Duel** (a competitive $7 \times 7$ Isolation game variant featuring chess-queen movement and directional push mechanics). 
 
-In a course-wide double round-robin tournament against 49 peer agents (98 total matches, alternating player order P1/P2), this agent finished **3rd Place overall with a 96–2 record (97.96% win rate)**[cite: 3].
+In a course-wide double round-robin tournament against 49 peer agents (98 total matches, alternating player order P1/P2), this agent finished **3rd Place overall with a 96–2 record (97.96% win rate)**.
 
 
 ##  Tournament Results
 
-The competition evaluated each agent head-to-head in a double round-robin format against 49 competitors[cite: 3]:
+The competition evaluated each agent head-to-head in a double round-robin format against 49 competitors:
 
 | Metric | Result | Details |
 | :--- | :---: | :--- |
-| **Final Standing** | **3rd Place** | Out of 50 participating student agents[cite: 3] |
-| **Total Games** | **98** | 49 games as Player 1 + 49 games as Player 2[cite: 3] |
-| **Wins** | **96** | 97.96% tournament win rate[cite: 3] |
-| **Losses** | **2** | 2.04% loss rate[cite: 3] |
-| **Baseline Matches** | **99% / 100%** | Measured against randomized and heuristic baselines[cite: 3] |
+| **Final Standing** | **3rd Place** | Out of 50 participating student agents |
+| **Total Games** | **98** | 49 games as Player 1 + 49 games as Player 2 |
+| **Wins** | **96** | 97.96% tournament win rate |
+| **Losses** | **2** | 2.04% loss rate |
+| **Baseline Matches** | **99% / 100%** | Measured against randomized and heuristic baselines |
 
 
 ##  Game Mechanics
 
 The game is played on a $7 \times 7$ grid between two queens:
-* **Movement:** Moves like a chess Queen across unblocked straight or diagonal paths[cite: 1].
-* **Square Contraction:** Every cell vacated by a queen becomes permanently **blocked**[cite: 1].
-* **Push Action:** Landing on a tile occupied by the opponent queen pushes them 1 cell in the attack direction[cite: 1].
-* **Loss Conditions:** A player loses if pushed out of bounds or if no legal moves remain on their turn[cite: 1].
+* **Movement:** Moves like a chess Queen across unblocked straight or diagonal paths.
+* **Square Contraction:** Every cell vacated by a queen becomes permanently **blocked**.
+* **Push Action:** Landing on a tile occupied by the opponent queen pushes them 1 cell in the attack direction.
+* **Loss Conditions:** A player loses if pushed out of bounds or if no legal moves remain on their turn.
 
 
 ##  Architecture & Strategic Design
@@ -65,28 +65,28 @@ The game is played on a $7 \times 7$ grid between two queens:
 
 
 ### 1. Symmetric Opening Randomization
-To eliminate first-move determinism and bypass hardcoded opening traps, the agent randomly picks from four diagonal anchor points on turn one: `(1,1)`, `(1,5)`, `(5,1)`, and `(5,5)`[cite: 2, 3].
+To eliminate first-move determinism and bypass hardcoded opening traps, the agent randomly picks from four diagonal anchor points on turn one: `(1,1)`, `(1,5)`, `(5,1)`, and `(5,5)`.
 
 ### 2. Pre-Search Margin Filtering (`in_margin_and_push`)
-Filters out high-risk candidate moves prior to tree exploration[cite: 2, 3]:
-* Identifies boundary tiles overlapping with the opponent's direct line of sight[cite: 2, 3].
-* Prevents suicidal moves onto edge cells where an opponent push would immediately eject the queen from the board[cite: 1, 2, 3].
+Filters out high-risk candidate moves prior to tree exploration:
+* Identifies boundary tiles overlapping with the opponent's direct line of sight.
+* Prevents suicidal moves onto edge cells where an opponent push would immediately eject the queen from the board.
 
 ### 3. Dynamic Phase-Based Search Depth
-Search depth dynamically adapts to game progression, maximizing tactical vision when the branching factor drops[cite: 2, 3]:
-* **Turns $0\text{--}9$:** Depth 2 (rapid opening setup, preserving time budget)[cite: 2, 3].
-* **Turns $10\text{--}19$:** Depth 4 (territory consolidation)[cite: 2, 3].
-* **Turns $20\text{--}29$:** Depth 6 (board constriction)[cite: 2, 3].
-* **Turns $30+$:** Depth 8+ (exhaustive endgame resolution)[cite: 2, 3].
+Search depth dynamically adapts to game progression, maximizing tactical vision when the branching factor drops:
+* **Turns $0\text{--}9$:** Depth 2 (rapid opening setup, preserving time budget).
+* **Turns $10\text{--}19$:** Depth 4 (territory consolidation).
+* **Turns $20\text{--}29$:** Depth 6 (board constriction).
+* **Turns $30+$:** Depth 8+ (exhaustive endgame resolution).
 
 ### 4. Heuristic Utility Function (`CustomEvalFn`)
-Evaluates game states across mobility, positioning, and tactical threat[cite: 2, 3]:
+Evaluates game states across mobility, positioning, and tactical threat:
 
 $$\text{Utility}(s) = \Big(|\mathcal{M}_{\text{player}}| - |\mathcal{M}_{\text{opponent}}|\Big) + \text{Bonus}_{\text{center}} + \text{Bonus}_{\text{push}}$$
 
-* **Mobility Differential:** Maximizes personal move options while strangling opponent branches[cite: 2, 3].
-* **Center Dominance:** $+10$ strategic score for holding center tiles `(3,3)`, `(3,4)`, `(4,3)`, `(4,4)`[cite: 2, 3].
-* **Push Bonus:** $+15$ incentive for achieving offensive displacement threats[cite: 2, 3].
+* **Mobility Differential:** Maximizes personal move options while strangling opponent branches.
+* **Center Dominance:** $+10$ strategic score for holding center tiles `(3,3)`, `(3,4)`, `(4,3)`, `(4,4)`.
+* **Push Bonus:** $+15$ incentive for achieving offensive displacement threats.
 
 
 ##  Repository Structure
